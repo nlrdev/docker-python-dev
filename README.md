@@ -1,11 +1,11 @@
-##Read Me
+## Read Me
 
 
-#####Nginx reverse proxy and Django + Gunicorn with docker.
+##### Nginx reverse proxy and Django + Gunicorn with docker.
 
 The Nginx container is set up with basic config to listen on port 80 and forward and requests to the applications container that is running Gunicorn listening on port 8000.
 
-##Setup 
+## Setup 
 1. Install 
 [Docker](https://docs.docker.com/install/) on the machine.
 
@@ -20,7 +20,7 @@ The Nginx container is set up with basic config to listen on port 80 and forward
 6. in the`Bin` directory run ` :~# docker-compose up `
 
 
-##Optional
+## Optional
 
 ##### Setup script for centOS/RH
 
