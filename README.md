@@ -6,26 +6,24 @@
 The Nginx container is set up with basic config to listen on port 80 and forward all requests to the applications container running Gunicorn + Django listening on port 8000.
 
 ## Setup 
-1. Install 
-[Docker](https://docs.docker.com/install/) on the machine.
+1. Install [Docker](https://docs.docker.com/install/) on the machine.
 
-2. Pull files from git.
+2. [Pull](https://github.com/Axiomvp/docker-nginx-gunicorn-django.git) files from git.
 
-3. Copy your Django app in the app into the `Bin/'yourapp'` directory, ensure the manage.py is accessible in app: `Bin/'yourapp'/manage.py`
+3. Copy your Django app in the app into the `bin/'yourapp'` directory, ensure the manage.py is accessible: `bin/'yourapp'/manage.py`
 
 4. Ensure that `'yourapp'` name in the `Dockerfile` and `docker-compose.yml`  match your django applications name in:`Bin/'yourapp'`
 
-5. Ensure you add any additional requirements to `requirements.txt`
+5. Add any additional requirements to `requirements.txt`
 
-6. in the`Bin` directory run ` :~# docker-compose up `
+6. In `bin/` directory run: ` :~# docker-compose up `
 
 
 ## Optional
 
-##### Setup script for centOS/RH
+##### Setup script for centOS/RedHat
 
-Once you have configured the setup script.
-`:~# ./setup_linux.sh`
+Run: `:~# ./setup_linux.sh` once you have configured the setup script.
 
 See below for configureation ooptions:
 
