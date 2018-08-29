@@ -25,7 +25,9 @@ The Nginx container is set up with basic config to listen on port 80 and forward
 ##### Setup script for centOS/RH
 
 Once you have configured the setup script.
-Run`:~# ./setup_linux.sh`
+`:~# ./setup_linux.sh`
+
+See below for configureation ooptions:
 
 Create a new user if you want to isolate the python initialization:
 
