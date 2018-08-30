@@ -1,6 +1,4 @@
-## Read Me
-
-##### Nginx reverse proxy and Django + Gunicorn with docker.
+## Nginx reverse proxy and Django + Gunicorn with docker.
 
 The Nginx container is set up with basic config to listen on port 80 and forward all requests to the applications container running Gunicorn + Django listening on port 8000.
 
@@ -16,7 +14,7 @@ The Nginx container is set up with basic config to listen on port 80 and forward
 
 5. Add any additional requirements to `requirements.txt`
 
-6. In `bin/` directory run: `[bash]$ docker-compose up`
+6. In the `bin/` directory, run: `[bash]$ docker-compose up`
 
 ## Optional
 
@@ -24,7 +22,7 @@ The Nginx container is set up with basic config to listen on port 80 and forward
 
 Run: `[bash]$ ./setup_linux.sh` once you have configured the setup script.
 
-See below for configureation ooptions:
+See below for configureation options:
 
 Create a new user if you want to isolate the python initialization:
 
