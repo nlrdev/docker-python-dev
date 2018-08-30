@@ -1,6 +1,14 @@
-## Nginx reverse proxy and Django + Gunicorn with docker.
+# Docker
 
-The Nginx container is set up with basic config to listen on port 80 and forward all requests to the applications container running Gunicorn + Django listening on port 8000.
+## Nginx reverse proxy
+
+The Nginx container is set up with basic config to listen on port 80 and forward all requests to the application container running Gunicorn + Django listening on port 8000.
+
+Nginx config can be found here:  `bin\config\nginx\nginx.conf'`
+
+## Django + Gunicorn
+
+A python container running Django + Gunicorn. Gunicorn webserver:  `gunicorn app.wsgi -b 0.0.0.0:8000`. Application dirrectory: `yourapp` : `/home/webserver/app`
 
 ## Setup
 
