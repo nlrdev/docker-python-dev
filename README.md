@@ -16,20 +16,20 @@ The Nginx container is set up with basic config to listen on port 80 and forward
 
 5. Add any additional requirements to `requirements.txt`
 
-6. In `bin/` directory run: `$ docker-compose up`
+6. In `bin/` directory run: `[bash]$ docker-compose up`
 
 ## Optional
 
 ##### Setup script for centOS/RedHat
 
-Run: `$ ./setup_linux.sh` once you have configured the setup script.
+Run: `[bash]$ ./setup_linux.sh` once you have configured the setup script.
 
 See below for configureation ooptions:
 
 Create a new user if you want to isolate the python initialization:
 
-    $ useradd user
-    $ passwd password
-    $ usermod -aG wheel user
+    [bash]$ useradd user
+    [bash]$ passwd password
+    [bash]$ usermod -aG wheel user
 
 Set the user in the bash script `USER=user`
