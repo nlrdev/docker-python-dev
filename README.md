@@ -4,7 +4,7 @@
 
 The Nginx container is set up with basic config to listen on port 80 and forward all requests to the application container running Gunicorn + Django listening on port 8000.
 
-Nginx config can be found here:  `bin\config\nginx\nginx.conf'`
+Nginx config can be found here:  `bin\config\nginx\nginx.conf`
 
 ## Django + Gunicorn
 
