@@ -1,4 +1,4 @@
-# Dockerized Django app
+# Dockerized Django application
 
 ## Nginx reverse proxy
 
