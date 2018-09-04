@@ -12,6 +12,8 @@ A python container running Django + Gunicorn. Gunicorn webserver:  `gunicorn app
 
 ## Setup
 
+### Windows
+
 1. Install [Docker](https://docs.docker.com/install/) on the machine.
 
 2. [Pull](https://github.com/Axiomvp/docker-nginx-gunicorn-django.git) files from git.
@@ -24,7 +26,7 @@ A python container running Django + Gunicorn. Gunicorn webserver:  `gunicorn app
 
 6. In the `bin/` directory, run: `[bash]$ docker-compose up`
 
-## Optional
+### Linux
 
 ##### Setup script for centOS/RedHat
 
