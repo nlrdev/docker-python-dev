@@ -1,4 +1,4 @@
-# Dockerize (boilerplate) - Django application
+# Dockerize: Python - Django application
 
 ## Nginx reverse proxy
 
