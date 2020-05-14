@@ -1,5 +1,7 @@
 # Dockerize: Python - Django application
 
+Please note this is a development environment. Please read the docs before using live.
+
 ## Nginx reverse proxy
 
 The Nginx container is set up with basic config to listen on port 80 and forward all requests to the application container running Gunicorn + Django listening on port 8000.
@@ -26,6 +28,6 @@ Nginx config can be found here:  `nginx\nginx.conf`
 
 7. Run: `[bash/powershell]$ docker-compose up -d`
 
-## postgres
+## Database
 
-You can change this to any database that you need for your aplication.
+This should be changed if you are not using Postgres.
