@@ -1,4 +1,4 @@
-# Dockerize: Python - Django application
+# Dockerize: Python Django Application
 
 Please note this is a development environment. Please read the docs before using live.
 
@@ -20,7 +20,7 @@ Nginx config can be found here:  `nginx\nginx.conf`
 
 3. [Pull](https://github.com/Axiomvp/docker-nginx-gunicorn-django.git) files from git.
 
-4. Copy your Django app to the `app'` directory, ensure the manage.py is accessible: `app'/manage.py`
+4. Copy your Django app to the `'app'` directory, ensure the `manage.py` is accessible: `app/manage.py`
 
 5. Add any additional requirements to `Pipfile`
 
