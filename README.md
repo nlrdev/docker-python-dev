@@ -6,13 +6,11 @@ Please note this is a development environment. Please read the docs before using
 
 The Nginx container is set up with basic config to listen on port 80 and forward all requests to the application container running Gunicorn + Django listening on port 8000.
 
-### Setup
 
 Nginx config can be found here:  `nginx\nginx.conf`
 
 ## Django + Gunicorn
 
-### Setup
 
 1. Install [Docker](https://docs.docker.com/engine/install/).
 
@@ -30,4 +28,4 @@ Nginx config can be found here:  `nginx\nginx.conf`
 
 ## Database
 
-This should be changed if you are not using Postgres.
+This should be changed if you are not using Postgres. Update the login details in the docker-compose file below `environment`
