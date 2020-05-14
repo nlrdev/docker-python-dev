@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    restart: always
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn app.wsgi:application  -b 0.0.0.0:8000"
+    container_name: app
+    volumes:
+      - ./app:/usr/src/app
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: nginx
+    ports:
+      - 80:8000
+    volumes:
+      - ./app:/usr/src/app
+      - ./nginx:/etc/nginx/conf.d/
+    depends_on:
+      - app
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: 'backendadmin'
+      POSTGRES_PASSWORD: 'test123'
+      POSTGRES_DB: 'backend'
+    volumes:
+      - postgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+
+volumes: 
+    postgdata:

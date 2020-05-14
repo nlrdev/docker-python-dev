@@ -4,40 +4,28 @@
 
 The Nginx container is set up with basic config to listen on port 80 and forward all requests to the application container running Gunicorn + Django listening on port 8000.
 
-Nginx config can be found here:  `bin\config\nginx\nginx.conf`
+### Setup
+
+Nginx config can be found here:  `nginx\nginx.conf`
 
 ## Django + Gunicorn
 
-A python container running Django + Gunicorn. Gunicorn webserver:  `gunicorn app.wsgi -b 0.0.0.0:8000`. Application dirrectory: `yourapp` : `/home/webserver/app`
+### Setup
 
-## Setup
+1. Install [Docker](https://docs.docker.com/engine/install/).
 
-### Windows
+2. Install [Docker Compose](https://docs.docker.com/compose/install/).
 
-1. Install [Docker](https://docs.docker.com/install/) on the machine.
+3. [Pull](https://github.com/Axiomvp/docker-nginx-gunicorn-django.git) files from git.
 
-2. [Pull](https://github.com/Axiomvp/docker-nginx-gunicorn-django.git) files from git.
+4. Copy your Django app to the `app'` directory, ensure the manage.py is accessible: `app'/manage.py`
 
-3. Copy your Django app in the app into the `bin/'yourapp'` directory, ensure the manage.py is accessible: `bin/'yourapp'/manage.py`
+5. Add any additional requirements to `Pipfile`
 
-4. Ensure that `'yourapp'` name in the `Dockerfile` and `docker-compose.yml`  match your django applications name in:`bin/'yourapp'`
+6. Run: `[bash/powershell]$ docker-compose build`
 
-5. Add any additional requirements to `requirements.txt`
+7. Run: `[bash/powershell]$ docker-compose up -d`
 
-6. In the `bin/` directory, run: `[bash]$ docker-compose up`
+## postgres
 
-### Linux
-
-##### Setup script for centOS/RedHat
-
-Run: `[bash]$ ./setup_linux.sh` once you have configured the setup script.
-
-See below for configureation options:
-
-Create a new user if you want to isolate the python initialization:
-
-    [bash]$ useradd user
-    [bash]$ passwd password
-    [bash]$ usermod -aG wheel user
-
-Set the user in the bash script `USER=user`
+You can change this to any database that you need for your aplication.
