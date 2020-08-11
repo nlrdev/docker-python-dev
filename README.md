@@ -1,16 +1,12 @@
-# Dockerize: Python Django Application
+# Dockerize: Python Application
 
-Please note this is a development environment. Please read the docs before using live.
+This is a development environment. Please read the docs before using live.
 
 ## Nginx reverse proxy
-
-The Nginx container is set up with basic config to listen on port 80 and forward all requests to the application container running Gunicorn + Django listening on port 8000.
-
 
 Nginx config can be found here:  `nginx\nginx.conf`
 
 ## Django + Gunicorn
-
 
 1. Install [Docker](https://docs.docker.com/engine/install/).
 
