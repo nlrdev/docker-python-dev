@@ -32,7 +32,37 @@ This should be changed if you are not using Postgres. Update the login details i
 
 ### traefik 
 
-Add the following labels to the docker-compose file once you have [installed and configured](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
+[installed and configured](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
+
+Simples config for local dev env provided below:
+```
+version: "3"
+
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    command:
+      - --log.level=DEBUG
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --api.dashboard=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+    ports:
+      - 80:80
+      - 443:443
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.rule=Host(`localhost`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      - traefik.http.routers.dashboard.service=api@internal
+      - traefik.http.routers.dashboard.middlewares=auth
+      - traefik.http.middlewares.auth.basicauth.users=(add your own basicauth hash here)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+```
+
+Add the following labels to the nginx config in docker-compose file, you no longer need to bind the ports of the nginx server.
 ```
     labels:
       - "traefik.enable=true"
