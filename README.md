@@ -71,4 +71,4 @@ Add the following labels to the nginx config in docker-compose file, you no long
       - "traefik.http.routers.nginx-frontend.rule=Host(`app.localhost`)"
       - "traefik.http.services.nginx-frontend.loadbalancer.server.port=80"
 ```
-You can just add the labels directly to the app, however, I prefer to have nginx for addition config and middleware.
+You can just add the labels directly to the app, however, I prefer to have nginx for additional config and middleware.
