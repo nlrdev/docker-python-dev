@@ -32,7 +32,7 @@ This should be changed if you are not using Postgres. Update the login details i
 
 ### traefik 
 
-[install and configured](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
+[install and configure](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
 
 Simples config for local dev env provided below:
 ```
