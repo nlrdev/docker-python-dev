@@ -25,3 +25,19 @@ Nginx config can be found here:  `nginx\nginx.conf`
 ## Database
 
 This should be changed if you are not using Postgres. Update the login details in the docker-compose file below `environment`
+
+
+## Additional configuration
+
+
+### traefik 
+
+Add the following labels to the docker-compose file once you have [installed and configured](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
+```
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=somenet"
+      - "traefik.http.routers.entrypoints=web"
+      - "traefik.http.routers.nginx-frontend.rule=Host(`app.localhost`)"
+      - "traefik.http.services.nginx-frontend.loadbalancer.server.port=80"
+```
