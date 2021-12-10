@@ -1,6 +1,6 @@
 # Dockerize: Python Application
 
-NOTE! This is a development environment. In production podman could be something to consider.
+NOTE! This is a development environment. Deploying in production requires additional configurations.
 
 ## Nginx reverse proxy
 
