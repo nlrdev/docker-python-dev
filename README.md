@@ -5,14 +5,20 @@ This example is for a django app, however any wsgi/asgi based app should work
 ## configuration
 
 
-### Build
+### Build:
 
 Build a base image, don't have to recompile dependencies when rebuilding the app
     
     $: docker build -f base.Dockerfile . -t localhost:5000/prebuildcontainer:latest
 
+Build the app image and deploy locally 
 
-### Example pipline
+    $: docker compose build
+    $: docker compose up -d    
+
+### Example pipline:
+
+Jenkinsfile
 
     pipeline {
         agent any
@@ -43,7 +49,7 @@ Build a base image, don't have to recompile dependencies when rebuilding the app
     from django.core.management.utils import get_random_secret_key
     print(get_random_secret_key())
 
-### traefik
+### traefik:
 
 [install and configure](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
 
