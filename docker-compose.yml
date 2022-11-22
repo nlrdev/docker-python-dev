@@ -1,35 +1,38 @@
 version: "3"
 
 services:
-  app:
+  my_app:
     build: .
+    env_file:
+      - .env
     restart: always
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn app.wsgi:application  -b 0.0.0.0:8000"
-    container_name: app
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn my_app.wsgi:my_application  -b 0.0.0.0:8000"
+    container_name: my_app
     volumes:
       - ./app:/usr/src/app
     depends_on:
       - db
 
-  nginx:
-    image: nginx:latest
+  my_app_nginx:
+    build: ./nginx
     restart: always
-    container_name: nginx
-    ports:
-      - 80:8000
+    container_name: my_app_nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.entrypoints=web"
+      - "traefik.http.routers.my_app_nginx.rule=Host(`my_app.localhost`)"
+      - "traefik.http.services.my_app_nginx.loadbalancer.server.port=80"
     volumes:
       - ./app:/usr/src/app
       - ./nginx:/etc/nginx/conf.d/
     depends_on:
-      - app
+      - my_app
 
   db:
     image: postgres
     restart: always
-    environment:
-      POSTGRES_USER: 'backendadmin'
-      POSTGRES_PASSWORD: 'test123'
-      POSTGRES_DB: 'backend'
+    env_file:
+      - .env
     volumes:
       - postgdata:/var/lib/postgresql/data
 

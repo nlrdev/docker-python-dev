@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  my_app:
+    build: .
+    env_file:
+      - .env
+    container_name: my_app
+    restart: always
+    command: bash -c "python manage.py makemigrations && python manage.py migrate &&
+      gunicorn config.wsgi:application  -b 0.0.0.0:80"
+    volumes:
+      - website_data:/usr/src/app
+
+  my_app_nginx:
+    build: ./nginx
+    restart: always
+    container_name: my_app_nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.my_app_nginx.entrypoints=websecure"
+      - "traefik.http.routers.my_app_nginx.tls.certresolver=sslresolver"
+      - "traefik.http.routers.my_app_nginx.rule=Host(`my_app.com`,`www.my_app.com`)"
+      - "traefik.http.services.my_app_nginx.loadbalancer.server.port=80"
+    volumes:
+      - website_data:/usr/src/app
+    depends_on:
+      - my_app
+
+  db-my_app:
+    image: postgres
+    restart: always
+    container_name: db-my_app 
+    env_file:
+      - .env
+    volumes:
+      - my_app_data:/var/lib/postgresql/data
+
+volumes:
+  my_app_data:
+  website_data:
+
+networks:
+  default:
+    external:
+      name: hostnet

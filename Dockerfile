@@ -1,7 +1,4 @@
-FROM python:3.8-slim
+FROM localhost:5000/prebuildcontainer:latest
 RUN mkdir /usr/src/app
+ADD ./website /usr/src/app
 WORKDIR /usr/src/app
-ADD ./app /usr/src/app
-RUN pip install --upgrade pip 
-RUN pip install pipenv
-RUN pipenv install --skip-lock --system --dev

@@ -1,73 +1,50 @@
 # Dockerize: Python Application
 
-NOTE! This is a development environment. Deploying in production requires additional configurations.
+This example is for a django app, however any wsgi/asgi based app should work
 
-## Nginx reverse proxy
+## configuration
 
-Nginx config can be found here:  `nginx\nginx.conf`
 
-## Django + Gunicorn
+### Build
 
-1. Install [Docker](https://docs.docker.com/engine/install/).
+Build a base image, don't have to recompile dependencies when rebuilding the app
+    
+    $: docker build -f base.Dockerfile . -t localhost:5000/prebuildcontainer:latest
 
-2. Install [Docker Compose](https://docs.docker.com/compose/install/).
 
-3. [Pull](https://github.com/Axiomvp/docker-nginx-gunicorn-django.git) files from git.
+### Example pipline
 
-4. Copy your Django app to the `'app'` directory, ensure the `manage.py` is accessible: `app/manage.py`
+    pipeline {
+        agent any
 
-5. Add any additional requirements to `Pipfile`
+        stages {
+            stage('Build') {
+                steps {
+                    sh 'docker compose -f prod.docker-compose.yml down'
+                    sh 'docker volume rm  my_app_website_data'
+                    sh 'docker compose -f prod.docker-compose.yml build --no-cache'
+                }
+            }
+            stage('Deploy') {
+                steps {
+                    sh 'docker compose -f prod.docker-compose.yml up -d --force-recreate'
+                }
+            }
+        }
+    }
 
-6. Run: `[bash/powershell]$ docker-compose build`
 
-7. Run: `[bash/powershell]$ docker-compose up -d`
-
-## Database
-
-This should be changed if you are not using Postgres. Update the login details in the docker-compose file below `environment`
 
 
 ## Additional configuration
 
+### Secret key:
 
-### traefik 
+    from django.core.management.utils import get_random_secret_key
+    print(get_random_secret_key())
+
+### traefik
 
 [install and configure](https://doc.traefik.io/traefik/providers/docker/) the traefik server.
 
-Simples config for local dev env provided below:
-```
-version: "3"
-
-services:
-  traefik:
-    image: traefik
-    container_name: traefik
-    command:
-      - --log.level=DEBUG
-      - --providers.docker=true
-      - --providers.docker.exposedbydefault=false
-      - --api.dashboard=true
-      - --entrypoints.web.address=:80
-      - --entrypoints.websecure.address=:443
-    ports:
-      - 80:80
-      - 443:443
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.dashboard.rule=Host(`localhost`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-      - traefik.http.routers.dashboard.service=api@internal
-      - traefik.http.routers.dashboard.middlewares=auth
-      - traefik.http.middlewares.auth.basicauth.users=(add your own basicauth hash here)
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-```
-
-Add the following labels to the nginx config in docker-compose file, you no longer need to bind the ports of the nginx server.
-```
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=somenet"
-      - "traefik.http.routers.entrypoints=web"
-      - "traefik.http.routers.nginx-frontend.rule=Host(`app.localhost`)"
-      - "traefik.http.services.nginx-frontend.loadbalancer.server.port=80"
-```
+See [docker-traefik-proxy repo](https://github.com/nlrdev/docker-traefik-proxy)
